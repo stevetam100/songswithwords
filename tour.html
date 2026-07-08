@@ -111,7 +111,7 @@ a{color:#e3d6c6;text-decoration:none}a:hover{color:#fa6552}
   </div>
 
   <!-- event list -->
-  <div data-m="list" style="display:flex;flex-direction:column;min-width:0;height:100%;box-sizing:border-box;overflow:hidden;margin-right:calc(-1 * clamp(24px,4vw,56px));border-left:1px solid rgba(227,214,198,.14);border-top:1px solid rgba(227,214,198,.14);animation:riseIn 2.2s .9s ease-in-out both">
+  <div data-m="list" style="display:flex;flex-direction:column;min-width:0;height:100%;box-sizing:border-box;overflow-y:auto;margin-right:calc(-1 * clamp(24px,4vw,56px));border-left:1px solid rgba(227,214,198,.14);border-top:1px solid rgba(227,214,198,.14);animation:riseIn 2.2s .9s ease-in-out both">
     <sc-for list="{{ events }}" as="ev" hint-placeholder-count="5">
       <div data-m="evrow" style="display:grid;grid-template-columns:110px 1fr auto;align-items:center;gap:clamp(16px,3vw,48px);padding:clamp(18px,3.4vh,34px) calc(8px + clamp(24px,4vw,56px)) clamp(18px,3.4vh,34px) clamp(20px,2.5vw,40px);border-bottom:1px solid rgba(227,214,198,.14)">
         <div>
@@ -119,15 +119,12 @@ a{color:#e3d6c6;text-decoration:none}a:hover{color:#fa6552}
           <div style="margin-top:8px;font:400 11px/1 'JetBrains Mono',monospace;letter-spacing:.14em;color:rgba(227,214,198,.5)">{{ ev.month }}</div>
         </div>
         <div style="min-width:0">
-          <div style="font:500 clamp(24px,2.6vw,38px)/1.1 'JetBrains Mono',monospace;letter-spacing:.04em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ ev.city }}</div>
+          <div style="font:500 clamp(20px,1.9vw,32px)/1.15 'JetBrains Mono',monospace;letter-spacing:.04em;overflow-wrap:break-word">{{ ev.city }}</div>
           <div style="margin-top:8px;font:400 11px/1 'JetBrains Mono',monospace;letter-spacing:.18em;color:rgba(227,214,198,.5)">{{ ev.venue }}</div>
         </div>
-        <a href="#booking" data-m="evbtn" style="display:inline-flex;align-items:center;gap:8px;font:500 11px/1 'JetBrains Mono',monospace;letter-spacing:.2em;color:#e3d6c6;border:1px solid rgba(227,214,198,.4);padding:14px 22px;transition:background 400ms ease,border-color 400ms ease" style-hover="background:rgba(250,101,82,.18);border-color:#fa6552">{{ ev.action }}<span style="font-size:12px">↗</span></a>
+        <span data-m="evbtn" style="display:inline-flex;align-items:center;gap:8px;font:500 11px/1 'JetBrains Mono',monospace;letter-spacing:.2em;color:rgba(227,214,198,.55);border:1px solid rgba(227,214,198,.4);padding:14px 22px;background:linear-gradient(to top right,transparent calc(50% - .75px),rgba(227,214,198,.5) calc(50% - .75px),rgba(227,214,198,.5) calc(50% + .75px),transparent calc(50% + .75px))">{{ ev.action }}</span>
       </div>
     </sc-for>
-    <div style="display:flex;justify-content:center;padding:clamp(28px,5vh,48px) clamp(24px,4vw,56px) clamp(28px,5vh,48px) 0">
-      <span style="font:500 12px/1 'JetBrains Mono',monospace;letter-spacing:.22em;color:rgba(227,214,198,.8);cursor:pointer;border-bottom:1px solid transparent;transition:color 400ms ease" style-hover="color:#fa6552">DISPLAY MORE EVENTS</span>
-    </div>
   </div>
 </section>
 
@@ -150,11 +147,14 @@ class Component extends DCLogic {
   state = { region: 'ALL' };
   renderVals() {
     const allEvents = [
-      { day: '18', month: "JUL '26", city: 'NEW YORK, USA', venue: 'PUBLIC RECORDS', action: 'TICKETS', region: 'NORTH AMERICA' },
-      { day: '25', month: "JUL '26", city: 'MONTAUK, USA', venue: 'THE SURF LODGE', action: 'TICKETS', region: 'NORTH AMERICA' },
-      { day: '08', month: "AUG '26", city: 'IBIZA, SPAIN', venue: 'HOSTAL LA TORRE', action: 'WAITLIST', region: 'EUROPE' },
-      { day: '22', month: "AUG '26", city: 'TULUM, MEXICO', venue: 'PAPAYA PLAYA', action: 'TICKETS', region: 'REST OF THE WORLD' },
-      { day: '05', month: "SEP '26", city: 'PARIS, FRANCE', venue: 'HOTEL AMOUR', action: 'WAITLIST', region: 'EUROPE' },
+      { day: '21', month: "FEB '26", city: 'TOKYO', venue: 'PRIVATE EVENT', action: 'TICKETS', region: 'REST OF THE WORLD' },
+      { day: '14', month: "MAR '26", city: 'SUN VALLEY', venue: 'PRIVATE EVENT', action: 'TICKETS', region: 'NORTH AMERICA' },
+      { day: '18', month: "APR '26", city: 'NYC', venue: 'PRIVATE EVENT', action: 'TICKETS', region: 'NORTH AMERICA' },
+      { day: '25–26', month: "APR '26", city: 'MIAMI', venue: 'SUMMIT AT SEA', action: 'TICKETS', region: 'NORTH AMERICA' },
+      { day: '16', month: "MAY '26", city: 'TURKEY', venue: 'HARVEST SERIES', action: 'TICKETS', region: 'EUROPE' },
+      { day: '23', month: "MAY '26", city: 'NEW JERSEY', venue: 'PRINCETON REUNION', action: 'TICKETS', region: 'NORTH AMERICA' },
+      { day: '25', month: "JUL '26", city: 'IBIZA', venue: 'PRIVATE EVENT', action: 'TICKETS', region: 'EUROPE' },
+      { day: '05', month: "SEP '26", city: 'BLACK ROCK CITY', venue: 'BURNING MAN', action: 'TICKETS', region: 'NORTH AMERICA' },
     ];
     const sel = this.state.region;
     const regions = ['ALL', 'EUROPE', 'NORTH AMERICA', 'REST OF THE WORLD'];

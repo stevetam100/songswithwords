@@ -89,13 +89,15 @@ a{color:#e3d6c6;text-decoration:none}a:hover{color:#fa6552}
 <!-- ============ GALLERY — horizontal strip ============ -->
 <section data-screen-label="Gallery" data-m="gsec" style="position:relative;z-index:1;height:100vh;box-sizing:border-box;display:flex;flex-direction:column;justify-content:center;padding:clamp(110px,16vh,170px) 0 68px">
   <div data-m="venues" style="padding:0 clamp(24px,4vw,56px);margin-top:calc(-1 * min(50px, max(0px, (100vh - 780px) / 2)));display:flex;flex-wrap:wrap;gap:10px 0;align-items:baseline;font:400 11px/1.7 'JetBrains Mono',monospace;letter-spacing:.22em;color:rgba(227,214,198,.7);animation:riseIn 1.2s .55s cubic-bezier(.2,.6,.2,1) both">
-    <span>MOTEL NEW YORK CITY POP-UP</span><span style="color:#fa6552;padding:0 14px">·</span>
-    <span>RECORD BAR TOKYO</span><span style="color:#fa6552;padding:0 14px">·</span>
-    <span>DEPARTMENT-O MEXICO CITY</span><span style="color:#fa6552;padding:0 14px">·</span>
-    <span>SIX SENSES IBIZA</span><span style="color:#fa6552;padding:0 14px">·</span>
-    <span>PLAYA ALCHEMIST</span><span style="color:#fa6552;padding:0 14px">·</span>
-    <span>BURNING MAN</span><span style="color:#fa6552;padding:0 14px">·</span>
-    <span>SILENCIO PEREZ</span>
+    <span><span style="font-weight:800;color:rgba(227,214,198,.98)">THE MOTEL</span> NEW YORK CITY</span><span style="color:#fa6552;padding:0 14px">·</span>
+    <span><span style="font-weight:800;color:rgba(227,214,198,.98)">POP-UP RECORD BAR</span> TOKYO</span><span style="color:#fa6552;padding:0 14px">·</span>
+    <span><span style="font-weight:800;color:rgba(227,214,198,.98)">DEPARTMENTO</span> MEXICO CITY</span><span style="color:#fa6552;padding:0 14px">·</span>
+    <span><span style="font-weight:800;color:rgba(227,214,198,.98)">SIX SENSES</span> IBIZA</span><span style="color:#fa6552;padding:0 14px">·</span>
+    <span><span style="font-weight:800;color:rgba(227,214,198,.98)">PLAYA ALCHEMIST</span> BURNING MAN</span><span style="color:#fa6552;padding:0 14px">·</span>
+    <span><span style="font-weight:800;color:rgba(227,214,198,.98)">SILENCIO</span> NEW YORK</span><span style="color:#fa6552;padding:0 14px">·</span>
+    <span><span style="font-weight:800;color:rgba(227,214,198,.98)">MAXIME'S</span> PARIS</span><span style="color:#fa6552;padding:0 14px">·</span>
+    <span><span style="font-weight:800;color:rgba(227,214,198,.98)">HARVEST</span> TURKEY</span><span style="color:#fa6552;padding:0 14px">·</span>
+    <span><span style="font-weight:800;color:rgba(227,214,198,.98)">SUMMIT</span> MIAMI</span>
   </div>
   <div style="margin:clamp(18px,3vh,28px) clamp(24px,4vw,56px) clamp(24px,4vh,40px);border-top:1px solid rgba(227,214,198,.16);animation:riseIn 1.2s .65s cubic-bezier(.2,.6,.2,1) both"></div>
   <div data-m="scroller" style="overflow-x:auto;overflow-y:hidden;scrollbar-width:none;-ms-overflow-style:none;animation:riseIn 1.2s .7s cubic-bezier(.2,.6,.2,1) both">
@@ -145,5 +147,12 @@ a{color:#e3d6c6;text-decoration:none}a:hover{color:#fa6552}
 </footer>
 
 </x-dc>
+<script type="text/x-dc" data-dc-script>
+
+class Component extends DCLogic {
+  renderVals() {
+    return {};
+  }
+}</script>
 </body>
 </html>
