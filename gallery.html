@@ -17,6 +17,7 @@ a{color:#e3d6c6;text-decoration:none}a:hover{color:#fa6552}
 ::selection{background:#a50215;color:#e3d6c6}
 @keyframes riseIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
 @keyframes pageImg{from{opacity:0;transform:scale(1.03)}to{opacity:1;transform:scale(1)}}
+@keyframes tickerMove{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 @keyframes blobRoam1{0%{transform:translate(0,0) scale(1)}25%{transform:translate(45%,18%) scale(1.12)}50%{transform:translate(70%,55%) scale(.95)}75%{transform:translate(25%,70%) scale(1.1)}100%{transform:translate(0,0) scale(1)}}
 @keyframes blobRoam2{0%{transform:translate(0,0) scale(1)}25%{transform:translate(-35%,-25%) scale(1.15)}50%{transform:translate(-65%,-50%) scale(.9)}75%{transform:translate(-20%,-65%) scale(1.08)}100%{transform:translate(0,0) scale(1)}}
 
@@ -36,8 +37,7 @@ a{color:#e3d6c6;text-decoration:none}a:hover{color:#fa6552}
 }
 @media (max-width:840px){
   [data-m~=gsec]{display:block !important;height:100vh !important;overflow-y:auto !important;padding:130px 0 90px !important;scrollbar-width:none}
-  [data-m~=venues]{margin-top:0 !important;font-size:9.5px !important;letter-spacing:.14em !important;padding:0 20px !important}
-  [data-m~=venues] span[style*="padding"]{padding:0 8px !important}
+  [data-m~=venues]{margin-top:0 !important;font-size:9.5px !important;letter-spacing:.14em !important;padding:0 !important}
   [data-m~=scroller]{overflow:visible !important}
   [data-m~=strip]{flex-direction:column !important;width:auto !important;height:auto !important;padding:0 20px !important;gap:12px !important}
   [data-m~=strip] > div{width:100% !important;height:40vh !important}
@@ -88,16 +88,31 @@ a{color:#e3d6c6;text-decoration:none}a:hover{color:#fa6552}
 
 <!-- ============ GALLERY — horizontal strip ============ -->
 <section data-screen-label="Gallery" data-m="gsec" style="position:relative;z-index:1;height:100vh;box-sizing:border-box;display:flex;flex-direction:column;justify-content:center;padding:clamp(110px,16vh,170px) 0 68px">
-  <div data-m="venues" style="padding:0 clamp(24px,4vw,56px);margin-top:calc(-1 * min(50px, max(0px, (100vh - 780px) / 2)));display:flex;flex-wrap:wrap;gap:10px 0;align-items:baseline;font:400 11px/1.7 'JetBrains Mono',monospace;letter-spacing:.22em;color:rgba(227,214,198,.7);animation:riseIn 1.2s .55s cubic-bezier(.2,.6,.2,1) both">
-    <span><span style="font-weight:800;color:rgba(227,214,198,.98)">THE MOTEL</span> NEW YORK CITY</span><span style="color:#fa6552;padding:0 14px">·</span>
-    <span><span style="font-weight:800;color:rgba(227,214,198,.98)">POP-UP RECORD BAR</span> TOKYO</span><span style="color:#fa6552;padding:0 14px">·</span>
-    <span><span style="font-weight:800;color:rgba(227,214,198,.98)">DEPARTMENTO</span> MEXICO CITY</span><span style="color:#fa6552;padding:0 14px">·</span>
-    <span><span style="font-weight:800;color:rgba(227,214,198,.98)">SIX SENSES</span> IBIZA</span><span style="color:#fa6552;padding:0 14px">·</span>
-    <span><span style="font-weight:800;color:rgba(227,214,198,.98)">PLAYA ALCHEMIST</span> BURNING MAN</span><span style="color:#fa6552;padding:0 14px">·</span>
-    <span><span style="font-weight:800;color:rgba(227,214,198,.98)">SILENCIO</span> NEW YORK</span><span style="color:#fa6552;padding:0 14px">·</span>
-    <span><span style="font-weight:800;color:rgba(227,214,198,.98)">MAXIME'S</span> PARIS</span><span style="color:#fa6552;padding:0 14px">·</span>
-    <span><span style="font-weight:800;color:rgba(227,214,198,.98)">HARVEST</span> TURKEY</span><span style="color:#fa6552;padding:0 14px">·</span>
-    <span><span style="font-weight:800;color:rgba(227,214,198,.98)">SUMMIT</span> MIAMI</span>
+  <div data-m="venues" style="padding-top:29px;margin-top:calc(-1 * min(50px, max(0px, (100vh - 780px) / 2)));overflow:hidden;font:400 11px/1.7 'JetBrains Mono',monospace;letter-spacing:.22em;color:rgba(227,214,198,.7);animation:riseIn 1.2s .55s cubic-bezier(.2,.6,.2,1) both">
+    <div style="display:flex;align-items:baseline;width:max-content;white-space:nowrap;animation:tickerMove 70s linear infinite">
+      <span style="display:flex;align-items:baseline">
+        <span><span style="font-weight:800;color:rgba(227,214,198,.98)">THE MOTEL</span> NEW YORK CITY</span><span style="color:#fa6552;padding:0 18px">·</span>
+        <span><span style="font-weight:800;color:rgba(227,214,198,.98)">POP-UP RECORD BAR</span> TOKYO</span><span style="color:#fa6552;padding:0 18px">·</span>
+        <span><span style="font-weight:800;color:rgba(227,214,198,.98)">DEPARTMENTO</span> MEXICO CITY</span><span style="color:#fa6552;padding:0 18px">·</span>
+        <span><span style="font-weight:800;color:rgba(227,214,198,.98)">SIX SENSES</span> IBIZA</span><span style="color:#fa6552;padding:0 18px">·</span>
+        <span><span style="font-weight:800;color:rgba(227,214,198,.98)">PLAYA ALCHEMIST</span> BURNING MAN</span><span style="color:#fa6552;padding:0 18px">·</span>
+        <span><span style="font-weight:800;color:rgba(227,214,198,.98)">SILENCIO</span> NEW YORK</span><span style="color:#fa6552;padding:0 18px">·</span>
+        <span><span style="font-weight:800;color:rgba(227,214,198,.98)">MAXIME'S</span> PARIS</span><span style="color:#fa6552;padding:0 18px">·</span>
+        <span><span style="font-weight:800;color:rgba(227,214,198,.98)">HARVEST</span> TURKEY</span><span style="color:#fa6552;padding:0 18px">·</span>
+        <span><span style="font-weight:800;color:rgba(227,214,198,.98)">SUMMIT</span> MIAMI</span><span style="color:#fa6552;padding:0 18px">·</span>
+      </span>
+      <span style="display:flex;align-items:baseline">
+        <span><span style="font-weight:800;color:rgba(227,214,198,.98)">THE MOTEL</span> NEW YORK CITY</span><span style="color:#fa6552;padding:0 18px">·</span>
+        <span><span style="font-weight:800;color:rgba(227,214,198,.98)">POP-UP RECORD BAR</span> TOKYO</span><span style="color:#fa6552;padding:0 18px">·</span>
+        <span><span style="font-weight:800;color:rgba(227,214,198,.98)">DEPARTMENTO</span> MEXICO CITY</span><span style="color:#fa6552;padding:0 18px">·</span>
+        <span><span style="font-weight:800;color:rgba(227,214,198,.98)">SIX SENSES</span> IBIZA</span><span style="color:#fa6552;padding:0 18px">·</span>
+        <span><span style="font-weight:800;color:rgba(227,214,198,.98)">PLAYA ALCHEMIST</span> BURNING MAN</span><span style="color:#fa6552;padding:0 18px">·</span>
+        <span><span style="font-weight:800;color:rgba(227,214,198,.98)">SILENCIO</span> NEW YORK</span><span style="color:#fa6552;padding:0 18px">·</span>
+        <span><span style="font-weight:800;color:rgba(227,214,198,.98)">MAXIME'S</span> PARIS</span><span style="color:#fa6552;padding:0 18px">·</span>
+        <span><span style="font-weight:800;color:rgba(227,214,198,.98)">HARVEST</span> TURKEY</span><span style="color:#fa6552;padding:0 18px">·</span>
+        <span><span style="font-weight:800;color:rgba(227,214,198,.98)">SUMMIT</span> MIAMI</span><span style="color:#fa6552;padding:0 18px">·</span>
+      </span>
+    </div>
   </div>
   <div style="margin:clamp(18px,3vh,28px) clamp(24px,4vw,56px) clamp(24px,4vh,40px);border-top:1px solid rgba(227,214,198,.16);animation:riseIn 1.2s .65s cubic-bezier(.2,.6,.2,1) both"></div>
   <div data-m="scroller" style="overflow-x:auto;overflow-y:hidden;scrollbar-width:none;-ms-overflow-style:none;animation:riseIn 1.2s .7s cubic-bezier(.2,.6,.2,1) both">
