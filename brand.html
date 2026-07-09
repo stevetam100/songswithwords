@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet data-dc-atomics>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,700;0,800&amp;display=swap" rel="stylesheet">
+<style>
+html{height:100%}
+body{margin:0;background:#0b0708;color:#e3d6c6;font-family:'JetBrains Mono',monospace;-webkit-font-smoothing:antialiased}
+a{color:#e3d6c6;text-decoration:none}a:hover{color:#fa6552}
+::selection{background:#a50215;color:#e3d6c6}
+@keyframes riseIn{from{opacity:0}to{opacity:1}}
+@keyframes blobRoam1{0%{transform:translate(0,0) scale(1)}25%{transform:translate(45%,18%) scale(1.12)}50%{transform:translate(70%,55%) scale(.95)}75%{transform:translate(25%,70%) scale(1.1)}100%{transform:translate(0,0) scale(1)}}
+@keyframes blobRoam2{0%{transform:translate(0,0) scale(1)}25%{transform:translate(-35%,-25%) scale(1.15)}50%{transform:translate(-65%,-50%) scale(.9)}75%{transform:translate(-20%,-65%) scale(1.08)}100%{transform:translate(0,0) scale(1)}}
+@media (max-width:840px){
+  [data-m~=wrap]{padding:100px 20px 80px !important}
+  [data-m~=grid2]{grid-template-columns:1fr !important}
+  [data-m~=swatches]{grid-template-columns:1fr 1fr !important}
+}
+@media (prefers-reduced-motion: reduce){*{animation:none !important;transition:none !important}}
+</style>
+</helmet>
+
+<!-- ambient red blur field -->
+<div style="position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden">
+  <div style="position:absolute;left:-16%;top:-24%;width:81%;height:94%;background:radial-gradient(ellipse 55% 50% at 40% 45%,rgba(165,2,21,.16) 0%,rgba(71,6,13,.08) 45%,rgba(11,7,8,0) 72%);filter:blur(70px);animation:blobRoam1 56s ease-in-out infinite"></div>
+  <div style="position:absolute;right:-19%;bottom:-32%;width:69%;height:88%;background:radial-gradient(ellipse 50% 55% at 55% 55%,rgba(250,101,82,.07) 0%,rgba(165,2,21,.07) 40%,rgba(11,7,8,0) 70%);filter:blur(80px);animation:blobRoam2 72s ease-in-out infinite"></div>
+</div>
+
+<!-- grain overlay -->
+<div style="position:fixed;inset:0;z-index:60;pointer-events:none;opacity:0.06;background-image:url('data:image/svg+xml;utf8,&lt;svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22160%22 height=%22160%22&gt;&lt;filter id=%22n%22&gt;&lt;feTurbulence type=%22fractalNoise%22 baseFrequency=%220.9%22 numOctaves=%222%22/&gt;&lt;/filter&gt;&lt;rect width=%22160%22 height=%22160%22 filter=%22url(%23n)%22/&gt;&lt;/svg&gt;')"></div>
+
+<div data-m="wrap" data-screen-label="Brand Guidelines" style="position:relative;z-index:1;max-width:1060px;margin:0 auto;padding:110px clamp(24px,4vw,56px) 120px;animation:riseIn 2s .3s ease-in-out both">
+
+  <!-- header -->
+  <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap">
+    <div>
+      <div style="font:400 10px/1 'JetBrains Mono',monospace;letter-spacing:.3em;color:rgba(227,214,198,.45)">STEVE TAM — SONGS WITH WORDS</div>
+      <div style="margin-top:18px;font:500 clamp(38px,5vw,64px)/1 'JetBrains Mono',monospace;letter-spacing:.02em;color:rgba(227,214,198,.9)">BRAND<br>GUIDELINES</div>
+    </div>
+    <div style="font:400 10px/1.8 'JetBrains Mono',monospace;letter-spacing:.18em;color:rgba(227,214,198,.45);text-align:right">V1.0 · JULY 2026<br>SONGSWITHWORDS.COM</div>
+  </div>
+
+  <!-- 01 LOGO -->
+  <div style="margin-top:72px;border-top:1px solid rgba(227,214,198,.14);padding-top:28px">
+    <div style="display:flex;justify-content:space-between;align-items:baseline">
+      <div style="font:400 10px/1 'JetBrains Mono',monospace;letter-spacing:.3em;color:#fa6552">01 — LOGO</div>
+    </div>
+    <div data-m="grid2" style="margin-top:28px;display:grid;grid-template-columns:1fr 1fr;gap:14px">
+      <div style="background:#120a0a;border:1px solid rgba(227,214,198,.14);padding:56px;display:flex;align-items:center;justify-content:center;min-height:180px">
+        <div style="width:164px;height:110px;background-color:rgba(227,214,198,.55);-webkit-mask:url('assets/steve-tam-logo.png') no-repeat center/contain;mask:url('assets/steve-tam-logo.png') no-repeat center/contain"></div>
+      </div>
+      <div style="background:#e3d6c6;padding:56px;display:flex;align-items:center;justify-content:center;min-height:180px">
+        <div style="width:164px;height:110px;background-color:#0b0708;-webkit-mask:url('assets/steve-tam-logo.png') no-repeat center/contain;mask:url('assets/steve-tam-logo.png') no-repeat center/contain"></div>
+      </div>
+    </div>
+    <div style="margin-top:18px;max-width:620px;font:300 12px/1.7 'JetBrains Mono',monospace;letter-spacing:-.01em;color:rgba(227,214,198,.6)">Stacked wordmark — STEVE / TAM. Always rendered at 55% sand on dark grounds; solid near-black on light grounds. Never at full opacity, never in ember, never rotated or outlined. Give it clear space equal to its own height.</div>
+  </div>
+
+  <!-- 02 COLOR -->
+  <div style="margin-top:72px;border-top:1px solid rgba(227,214,198,.14);padding-top:28px">
+    <div style="font:400 10px/1 'JetBrains Mono',monospace;letter-spacing:.3em;color:#fa6552">02 — COLOR</div>
+    <div data-m="swatches" style="margin-top:28px;display:grid;grid-template-columns:repeat(4,1fr);gap:14px">
+      <div>
+        <div style="height:150px;background:#0b0708;border:1px solid rgba(227,214,198,.2)"></div>
+        <div style="margin-top:12px;font:700 11px/1 'JetBrains Mono',monospace;letter-spacing:.14em">NEAR BLACK</div>
+        <div style="margin-top:7px;font:400 10px/1.6 'JetBrains Mono',monospace;letter-spacing:.1em;color:rgba(227,214,198,.5)">#0B0708<br>PRIMARY GROUND</div>
+      </div>
+      <div>
+        <div style="height:150px;background:#e3d6c6"></div>
+        <div style="margin-top:12px;font:700 11px/1 'JetBrains Mono',monospace;letter-spacing:.14em">SOFT SAND</div>
+        <div style="margin-top:7px;font:400 10px/1.6 'JetBrains Mono',monospace;letter-spacing:.1em;color:rgba(227,214,198,.5)">#E3D6C6<br>ALL TEXT, AT 40–90% OPACITY</div>
+      </div>
+      <div>
+        <div style="height:150px;background:#fa6552"></div>
+        <div style="margin-top:12px;font:700 11px/1 'JetBrains Mono',monospace;letter-spacing:.14em">EMBER</div>
+        <div style="margin-top:7px;font:400 10px/1.6 'JetBrains Mono',monospace;letter-spacing:.1em;color:rgba(227,214,198,.5)">#FA6552<br>ACCENT · ACTIVE · HOVER</div>
+      </div>
+      <div>
+        <div style="height:150px;background:#a50215"></div>
+        <div style="margin-top:12px;font:700 11px/1 'JetBrains Mono',monospace;letter-spacing:.14em">DEEP RED</div>
+        <div style="margin-top:7px;font:400 10px/1.6 'JetBrains Mono',monospace;letter-spacing:.1em;color:rgba(227,214,198,.5)">#A50215<br>ATMOSPHERE · BLOBS ONLY</div>
+      </div>
+    </div>
+    <div style="margin-top:18px;max-width:620px;font:300 12px/1.7 'JetBrains Mono',monospace;letter-spacing:-.01em;color:rgba(227,214,198,.6)">Dark grounds always. Sand does the talking; ember appears sparingly — one accent per view. Deep red never touches text: it lives only in the roaming background blur fields. Hairlines are sand at 14%: rgba(227,214,198,.14).</div>
+  </div>
+
+  <!-- 03 TYPE -->
+  <div style="margin-top:72px;border-top:1px solid rgba(227,214,198,.14);padding-top:28px">
+    <div style="font:400 10px/1 'JetBrains Mono',monospace;letter-spacing:.3em;color:#fa6552">03 — TYPOGRAPHY</div>
+    <div style="margin-top:28px;border:1px solid rgba(227,214,198,.14);padding:clamp(24px,4vw,48px)">
+      <div style="font:500 clamp(40px,6vw,80px)/1 'JetBrains Mono',monospace;letter-spacing:.02em;color:rgba(227,214,198,.85)">JETBRAINS MONO</div>
+      <div style="margin-top:26px;display:flex;flex-direction:column;gap:16px">
+        <div style="display:flex;align-items:baseline;gap:24px;flex-wrap:wrap">
+          <span style="font:400 10px/1 'JetBrains Mono',monospace;letter-spacing:.18em;color:rgba(227,214,198,.4);width:150px;flex:none">DISPLAY · 500</span>
+          <span style="font:500 26px/1.1 'JetBrains Mono',monospace;letter-spacing:.02em">SELECTED SETS &amp; CITIES</span>
+        </div>
+        <div style="display:flex;align-items:baseline;gap:24px;flex-wrap:wrap">
+          <span style="font:400 10px/1 'JetBrains Mono',monospace;letter-spacing:.18em;color:rgba(227,214,198,.4);width:150px;flex:none">LABEL · 400 CAPS</span>
+          <span style="font:400 11px/1 'JetBrains Mono',monospace;letter-spacing:.3em;color:rgba(227,214,198,.7)">TRACKED ALL-CAPS LABELS · .2–.3EM</span>
+        </div>
+        <div style="display:flex;align-items:baseline;gap:24px;flex-wrap:wrap">
+          <span style="font:400 10px/1 'JetBrains Mono',monospace;letter-spacing:.18em;color:rgba(227,214,198,.4);width:150px;flex:none">BODY · 300</span>
+          <span style="font:300 13px/1.65 'JetBrains Mono',monospace;letter-spacing:-.02em;color:rgba(227,214,198,.72)">House, deep house, disco — and songs with words.</span>
+        </div>
+        <div style="display:flex;align-items:baseline;gap:24px;flex-wrap:wrap">
+          <span style="font:400 10px/1 'JetBrains Mono',monospace;letter-spacing:.18em;color:rgba(227,214,198,.4);width:150px;flex:none">EMPHASIS · 700–800</span>
+          <span style="font:800 13px/1 'JetBrains Mono',monospace;letter-spacing:.22em;color:rgba(227,214,198,.98)">SONGS WITH WORDS</span>
+        </div>
+      </div>
+    </div>
+    <div style="margin-top:18px;max-width:620px;font:300 12px/1.7 'JetBrains Mono',monospace;letter-spacing:-.01em;color:rgba(227,214,198,.6)">One family, everywhere. Hierarchy comes from weight, tracking, and opacity — never from a second typeface. Big display type sits at 55–90% sand; supporting text drops to 40–70%.</div>
+  </div>
+
+  <!-- 04 ICONOGRAPHY -->
+  <div style="margin-top:72px;border-top:1px solid rgba(227,214,198,.14);padding-top:28px">
+    <div style="font:400 10px/1 'JetBrains Mono',monospace;letter-spacing:.3em;color:#fa6552">04 — ICONOGRAPHY</div>
+    <div style="margin-top:28px;display:flex;gap:14px;flex-wrap:wrap">
+      <div style="width:120px;height:120px;border:1px solid rgba(227,214,198,.14);display:flex;align-items:center;justify-content:center;color:rgba(227,214,198,.7)">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="5"></rect><circle cx="12" cy="12" r="4.2"></circle><circle cx="17.4" cy="6.6" r="1.1" fill="currentColor" stroke="none"></circle></svg>
+      </div>
+      <div style="width:120px;height:120px;border:1px solid rgba(227,214,198,.14);display:flex;align-items:center;justify-content:center;color:rgba(227,214,198,.7)">
+        <svg width="28" height="26" viewBox="0 0 24 24" fill="currentColor"><rect x="3" y="12" width="2" height="7" rx="1"></rect><rect x="7" y="9" width="2" height="10" rx="1"></rect><rect x="11" y="6" width="2" height="13" rx="1"></rect><rect x="15" y="8" width="2" height="11" rx="1"></rect><rect x="19" y="11" width="2" height="8" rx="1"></rect></svg>
+      </div>
+      <div style="width:120px;height:120px;border:1px solid rgba(227,214,198,.14);display:flex;align-items:center;justify-content:center">
+        <div style="width:52px;height:52px;border-radius:50%;border:1px solid rgba(227,214,198,.4);display:flex;align-items:center;justify-content:center">
+          <div style="width:0;height:0;border-left:11px solid rgba(227,214,198,.8);border-top:6.5px solid transparent;border-bottom:6.5px solid transparent;margin-left:3px"></div>
+        </div>
+      </div>
+      <div style="width:120px;height:120px;border:1px solid rgba(227,214,198,.14);display:flex;align-items:center;justify-content:center">
+        <span style="font:500 11px/1 'JetBrains Mono',monospace;letter-spacing:.2em;color:#e3d6c6;border:1px solid rgba(227,214,198,.45);border-radius:999px;padding:12px 18px">PILL</span>
+      </div>
+      <div style="width:120px;height:120px;border:1px solid rgba(227,214,198,.14);display:flex;align-items:center;justify-content:center;font:400 14px/1 'JetBrains Mono',monospace;color:#fa6552">·&nbsp;&nbsp;↗</div>
+    </div>
+    <div style="margin-top:18px;max-width:620px;font:300 12px/1.7 'JetBrains Mono',monospace;letter-spacing:-.01em;color:rgba(227,214,198,.6)">Hairline strokes (1.5–1.6px) at 70% sand, geometric and quiet. Circles for playback, pills for calls to action, ember middots as separators, ↗ for outbound links. No filled icon sets, no emoji, no decoration.</div>
+  </div>
+
+  <!-- 05 PHOTOGRAPHY -->
+  <div style="margin-top:72px;border-top:1px solid rgba(227,214,198,.14);padding-top:28px">
+    <div style="font:400 10px/1 'JetBrains Mono',monospace;letter-spacing:.3em;color:#fa6552">05 — PHOTOGRAPHY</div>
+    <div data-m="grid2" style="margin-top:28px;display:grid;grid-template-columns:1fr 1fr;gap:14px">
+      <div style="position:relative;height:280px;overflow:hidden">
+        <img src="assets/hero-red.jpg" alt="Untreated" style="width:100%;height:100%;object-fit:cover">
+        <div style="position:absolute;left:14px;bottom:12px;font:400 9px/1 'JetBrains Mono',monospace;letter-spacing:.22em;color:rgba(227,214,198,.75)">SOURCE</div>
+      </div>
+      <div style="position:relative;height:280px;overflow:hidden">
+        <img src="assets/hero-red.jpg" alt="Treated" style="width:100%;height:100%;object-fit:cover;filter:saturate(0.8) brightness(0.82) contrast(1.06) sepia(0.14)">
+        <div style="position:absolute;inset:0;pointer-events:none;opacity:.22;mix-blend-mode:overlay;background-image:url('data:image/svg+xml;utf8,&lt;svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22160%22 height=%22160%22&gt;&lt;filter id=%22pg%22&gt;&lt;feTurbulence type=%22fractalNoise%22 baseFrequency=%220.55%22 numOctaves=%223%22/&gt;&lt;/filter&gt;&lt;rect width=%22160%22 height=%22160%22 filter=%22url(%23pg)%22/&gt;&lt;/svg&gt;');background-size:220px 220px;image-rendering:pixelated"></div>
+        <div style="position:absolute;left:14px;bottom:12px;font:400 9px/1 'JetBrains Mono',monospace;letter-spacing:.22em;color:rgba(227,214,198,.75)">TREATED</div>
+      </div>
+    </div>
+    <div style="margin-top:18px;max-width:620px;font:300 12px/1.7 'JetBrains Mono',monospace;letter-spacing:-.01em;color:rgba(227,214,198,.6)">Treatment recipe: saturate .8 · brightness .82 · contrast 1.06 · sepia .14, then film grain at 22% overlay. Photos sit behind black gradient scrims when text is on top. Blends and extensions must be seamless — no visible seams, matched grain and color. Captions in 9px tracked caps, bottom-left.</div>
+  </div>
+
+  <!-- 06 LOOK & FEEL -->
+  <div style="margin-top:72px;border-top:1px solid rgba(227,214,198,.14);padding-top:28px">
+    <div style="font:400 10px/1 'JetBrains Mono',monospace;letter-spacing:.3em;color:#fa6552">06 — LOOK &amp; FEEL</div>
+    <div data-m="grid2" style="margin-top:28px;display:grid;grid-template-columns:1fr 1fr;gap:14px">
+      <div style="border:1px solid rgba(227,214,198,.14);padding:28px">
+        <div style="font:700 11px/1 'JetBrains Mono',monospace;letter-spacing:.2em">DARK &amp; CINEMATIC</div>
+        <div style="margin-top:12px;font:300 12px/1.7 'JetBrains Mono',monospace;color:rgba(227,214,198,.6)">One full-bleed frame per page. Near-black grounds, red light roaming softly behind everything, grain over everything at 6%.</div>
+      </div>
+      <div style="border:1px solid rgba(227,214,198,.14);padding:28px">
+        <div style="font:700 11px/1 'JetBrains Mono',monospace;letter-spacing:.2em">SLOW &amp; SUBTLE</div>
+        <div style="margin-top:12px;font:300 12px/1.7 'JetBrains Mono',monospace;color:rgba(227,214,198,.6)">Everything fades — nothing jumps. Backgrounds settle over 2.4–3.2s; text follows ~.5s later. Pure opacity, gentle ease-in-out, long loops.</div>
+      </div>
+      <div style="border:1px solid rgba(227,214,198,.14);padding:28px">
+        <div style="font:700 11px/1 'JetBrains Mono',monospace;letter-spacing:.2em">HAIRLINE STRUCTURE</div>
+        <div style="margin-top:12px;font:300 12px/1.7 'JetBrains Mono',monospace;color:rgba(227,214,198,.6)">1px sand rules at 14% divide space; verticals meet horizontals exactly. Generous negative space; density is the exception.</div>
+      </div>
+      <div style="border:1px solid rgba(227,214,198,.14);padding:28px">
+        <div style="font:700 11px/1 'JetBrains Mono',monospace;letter-spacing:.2em">QUIET LUXURY</div>
+        <div style="margin-top:12px;font:300 12px/1.7 'JetBrains Mono',monospace;color:rgba(227,214,198,.6)">Understated over loud. One ember accent per view, tracked caps, no ornament. The room is premium; the voice is calm.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- footer -->
+  <div style="margin-top:72px;border-top:1px solid rgba(227,214,198,.16);padding-top:22px;display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap">
+    <div style="font:700 11px/1.4 'JetBrains Mono',monospace;letter-spacing:.22em;color:rgba(227,214,198,.55)">SONGS WITH WORDS</div>
+    <div style="font:400 10px/1 'JetBrains Mono',monospace;letter-spacing:.14em;color:rgba(227,214,198,.45)">© 2026 STEVE TAM · INTERNAL USE</div>
+  </div>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  renderVals() {
+    return {};
+  }
+}
+</script>
+</body>
+</html>
