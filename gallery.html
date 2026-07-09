@@ -165,6 +165,43 @@ a{color:#e3d6c6;text-decoration:none}a:hover{color:#fa6552}
 <script type="text/x-dc" data-dc-script>
 
 class Component extends DCLogic {
+  componentDidMount() {
+    const attach = () => {
+      const sc = document.querySelector('[data-m~="scroller"]');
+      if (!sc) { this._at = setTimeout(attach, 300); return; }
+      this._sc = sc;
+      this._target = sc.scrollLeft;
+      let raf = null;
+      const glide = () => {
+        const cur = sc.scrollLeft;
+        const diff = this._target - cur;
+        if (Math.abs(diff) < 0.5) { sc.scrollLeft = this._target; raf = null; return; }
+        sc.scrollLeft = cur + diff * 0.08;
+        raf = requestAnimationFrame(glide);
+      };
+      this._onWheel = (e) => {
+        if (window.innerWidth <= 840) return;
+        const max = sc.scrollWidth - sc.clientWidth;
+        if (max <= 0) return;
+        e.preventDefault();
+        const delta = Math.abs(e.deltaY) >= Math.abs(e.deltaX) ? e.deltaY : e.deltaX;
+        this._target = Math.min(max, Math.max(0, (this._target ?? sc.scrollLeft) + delta));
+        if (!raf) raf = requestAnimationFrame(glide);
+      };
+      this._onScroll = () => {
+        if (!raf) this._target = sc.scrollLeft;
+      };
+      window.addEventListener('wheel', this._onWheel, { passive: false });
+      sc.addEventListener('scroll', this._onScroll, { passive: true });
+      this._raf = () => raf;
+    };
+    attach();
+  }
+  componentWillUnmount() {
+    clearTimeout(this._at);
+    window.removeEventListener('wheel', this._onWheel);
+    if (this._sc) this._sc.removeEventListener('scroll', this._onScroll);
+  }
   renderVals() {
     return {};
   }

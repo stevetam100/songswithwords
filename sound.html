@@ -120,13 +120,16 @@ a{color:#e3d6c6;text-decoration:none}a:hover{color:#fa6552}
         <div style="min-width:0">
           <div data-m="mixtitle" style="font:500 clamp(17px,1.6vw,24px)/1.15 'JetBrains Mono',monospace;letter-spacing:.02em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ mix.title }}</div>
           <div style="margin-top:7px;font:400 10px/1 'JetBrains Mono',monospace;letter-spacing:.18em;color:rgba(227,214,198,.5)">{{ mix.meta }}</div>
-          <div data-m="wave" style="margin-top:14px;display:flex;align-items:flex-end;gap:2px;height:30px;width:100%;max-width:644px;overflow:hidden">
+          <div data-m="wave" onClick="{{ mix.seek }}" style="margin-top:14px;display:flex;align-items:flex-end;gap:2px;height:30px;width:100%;max-width:644px;overflow:hidden;cursor:pointer">
             <sc-for list="{{ mix.bars }}" as="b" hint-placeholder-count="40">
               <div style="flex:0 1 1.5px;min-width:1px;width:1.5px;height:{{ b.h }}px;background:{{ b.c }};border-radius:1px"></div>
             </sc-for>
           </div>
         </div>
-        <div style="font:400 10px/1 'JetBrains Mono',monospace;letter-spacing:.18em;color:rgba(227,214,198,.5);align-self:start;padding-top:6px">{{ mix.duration }}</div>
+        <div style="display:flex;flex-direction:column;align-items:flex-end;gap:16px;align-self:start;padding-top:6px">
+          <div style="font:400 10px/1 'JetBrains Mono',monospace;letter-spacing:.18em;color:rgba(227,214,198,.5)">{{ mix.duration }}</div>
+          <a href="{{ mix.url }}" target="_blank" rel="noopener" onClick="{{ mix.stopClick }}" style="display:inline-flex;align-items:center;gap:8px;font:500 10px/1 'JetBrains Mono',monospace;letter-spacing:.2em;color:#e3d6c6;border:1px solid rgba(227,214,198,.4);padding:11px 16px;transition:background 400ms ease,border-color 400ms ease" style-hover="background:rgba(250,101,82,.18);border-color:#fa6552">SOUNDCLOUD<span style="font-size:11px">↗</span></a>
+        </div>
       </div>
     </sc-for>
   </div>
@@ -150,8 +153,8 @@ a{color:#e3d6c6;text-decoration:none}a:hover{color:#fa6552}
 <script type="text/x-dc" data-dc-script>
 class Component extends DCLogic {
   tracks = [
-    { id: 1370554456, seed: 7, title: 'PINEAPPLE SUBMARINE — BURNING MAN 2022', meta: 'BRIDGING THE NIGHT · BLACK ROCK CITY' },
-    { id: 614332011, seed: 1, title: '1 — SOFTER SONGS WITH WORDS', meta: 'DEEP HOUSE · SONGS WITH WORDS THAT ARE A LITTLE BIT SOFTER' },
+    { id: 1370554456, seed: 7, title: 'PINEAPPLE SUBMARINE — BURNING MAN 2022', meta: 'BRIDGING THE NIGHT · BLACK ROCK CITY', url: 'https://soundcloud.com/pineapple-submarine/steve-tam-pineapple-submarine-burning-man-2022' },
+    { id: 614332011, seed: 1, title: '1 — SOFTER SONGS WITH WORDS', meta: 'DEEP HOUSE · SONGS WITH WORDS THAT ARE A LITTLE BIT SOFTER', url: 'https://soundcloud.com/steve-tam-1/1-softer-songs-with-words' },
   ];
   state = { playing: -1, progress: {}, durations: {} };
   componentDidMount() {
@@ -214,6 +217,21 @@ class Component extends DCLogic {
         playing: this.state.playing === i,
         notPlaying: this.state.playing !== i,
         toggle: () => { if (this._widgets && this._widgets[i]) this._widgets[i].toggle(); },
+        url: t.url,
+        stopClick: (e) => { e.stopPropagation(); },
+        seek: (e) => {
+          e.stopPropagation();
+          const w = this._widgets && this._widgets[i];
+          if (!w) return;
+          const rect = e.currentTarget.getBoundingClientRect();
+          const frac = Math.min(1, Math.max(0, (e.clientX - rect.left) / rect.width));
+          w.getDuration((ms) => {
+            if (!ms) return;
+            w.seekTo(Math.round(ms * frac));
+            this.setState((s) => ({ progress: Object.assign({}, s.progress, { [i]: frac }) }));
+            if (this.state.playing !== i) w.play();
+          });
+        },
       })),
     };
   }
