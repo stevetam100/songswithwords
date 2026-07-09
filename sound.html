@@ -10,6 +10,7 @@
 <helmet data-dc-atomics>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,700;0,800&amp;display=swap" rel="stylesheet">
+<script src="https://w.soundcloud.com/player/api.js"></script>
 <style>
 html{height:100%}
 body{margin:0;height:100%;overflow:hidden;background:#0b0708;color:#e3d6c6;font-family:'JetBrains Mono',monospace;-webkit-font-smoothing:antialiased}
@@ -107,9 +108,14 @@ a{color:#e3d6c6;text-decoration:none}a:hover{color:#fa6552}
   <!-- sets list -->
   <div data-m="list" style="display:flex;flex-direction:column;min-width:0;height:100%;box-sizing:border-box;overflow:hidden;margin-right:calc(-1 * clamp(24px,4vw,56px));border-left:1px solid rgba(227,214,198,.14);border-top:1px solid rgba(227,214,198,.14);animation:riseIn 2.2s .9s ease-in-out both">
     <sc-for list="{{ mixes }}" as="mix" hint-placeholder-count="4">
-      <div data-m="mixrow" style="display:grid;grid-template-columns:52px 1fr auto;align-items:center;gap:clamp(16px,2.5vw,36px);padding:clamp(16px,3vh,28px) calc(8px + clamp(24px,4vw,56px)) clamp(16px,3vh,28px) clamp(20px,2.5vw,40px);border-bottom:1px solid rgba(227,214,198,.14);cursor:pointer;transition:background 400ms ease" style-hover="background:rgba(250,101,82,.06)">
+      <div data-m="mixrow" onClick="{{ mix.toggle }}" style="display:grid;grid-template-columns:52px 1fr auto;align-items:center;gap:clamp(16px,2.5vw,36px);padding:clamp(16px,3vh,28px) calc(8px + clamp(24px,4vw,56px)) clamp(16px,3vh,28px) clamp(20px,2.5vw,40px);border-bottom:1px solid rgba(227,214,198,.14);cursor:pointer;transition:background 400ms ease" style-hover="background:rgba(250,101,82,.06)">
         <div style="width:52px;height:52px;flex:none;border-radius:50%;border:1px solid rgba(227,214,198,.4);display:flex;align-items:center;justify-content:center;transition:border-color 400ms ease">
-          <div style="width:0;height:0;border-left:11px solid rgba(227,214,198,.8);border-top:6.5px solid transparent;border-bottom:6.5px solid transparent;margin-left:3px"></div>
+          <sc-if value="{{ mix.playing }}" hint-placeholder-val="{{ false }}">
+            <div style="display:flex;gap:5px"><div style="width:4px;height:15px;background:rgba(227,214,198,.8)"></div><div style="width:4px;height:15px;background:rgba(227,214,198,.8)"></div></div>
+          </sc-if>
+          <sc-if value="{{ mix.notPlaying }}" hint-placeholder-val="{{ true }}">
+            <div style="width:0;height:0;border-left:11px solid rgba(227,214,198,.8);border-top:6.5px solid transparent;border-bottom:6.5px solid transparent;margin-left:3px"></div>
+          </sc-if>
         </div>
         <div style="min-width:0">
           <div data-m="mixtitle" style="font:500 clamp(17px,1.6vw,24px)/1.15 'JetBrains Mono',monospace;letter-spacing:.02em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ mix.title }}</div>
@@ -143,24 +149,72 @@ a{color:#e3d6c6;text-decoration:none}a:hover{color:#fa6552}
 </x-dc>
 <script type="text/x-dc" data-dc-script>
 class Component extends DCLogic {
+  tracks = [
+    { id: 1370554456, seed: 7, title: 'PINEAPPLE SUBMARINE — BURNING MAN 2022', meta: 'BRIDGING THE NIGHT · BLACK ROCK CITY' },
+    { id: 614332011, seed: 1, title: '1 — SOFTER SONGS WITH WORDS', meta: 'DEEP HOUSE · SONGS WITH WORDS THAT ARE A LITTLE BIT SOFTER' },
+  ];
+  state = { playing: -1, progress: {}, durations: {} };
+  componentDidMount() {
+    this._iframes = [];
+    this._widgets = [];
+    const bind = () => {
+      if (!window.SC || !window.SC.Widget) { this._bt = setTimeout(bind, 300); return; }
+      this.tracks.forEach((t, i) => {
+        const f = document.createElement('iframe');
+        f.setAttribute('allow', 'autoplay');
+        f.style.cssText = 'position:fixed;left:-20px;top:-20px;width:2px;height:2px;opacity:0;pointer-events:none;border:0';
+        f.src = 'https://w.soundcloud.com/player/?url=https%3A%2F%2Fapi.soundcloud.com%2Ftracks%2F' + t.id + '&auto_play=false&show_artwork=false';
+        document.body.appendChild(f);
+        this._iframes.push(f);
+        const w = SC.Widget(f);
+        this._widgets.push(w);
+        w.bind(SC.Widget.Events.READY, () => {
+          w.getDuration((ms) => {
+            if (ms) this.setState((s) => ({ durations: Object.assign({}, s.durations, { [i]: Math.round(ms / 60000) + ' MIN' }) }));
+          });
+        });
+        w.bind(SC.Widget.Events.PLAY, () => {
+          this.setState({ playing: i });
+          this._widgets.forEach((o, j) => { if (j !== i) o.pause(); });
+        });
+        w.bind(SC.Widget.Events.PAUSE, () => {
+          this.setState((s) => (s.playing === i ? { playing: -1 } : {}));
+        });
+        w.bind(SC.Widget.Events.PLAY_PROGRESS, (e) => {
+          this.setState((s) => ({ progress: Object.assign({}, s.progress, { [i]: e.relativePosition || 0 }) }));
+        });
+        w.bind(SC.Widget.Events.FINISH, () => {
+          this.setState((s) => ({ playing: -1, progress: Object.assign({}, s.progress, { [i]: 0 }) }));
+        });
+      });
+    };
+    bind();
+  }
+  componentWillUnmount() {
+    clearTimeout(this._bt);
+    (this._iframes || []).forEach((f) => { if (f.parentNode) f.parentNode.removeChild(f); });
+  }
   renderVals() {
-    const wave = (seed, n) => {
+    const wave = (seed, n, frac) => {
       const bars = [];
       for (let i = 0; i < n; i++) {
         const t = Math.sin(i * 0.55 + seed) * Math.sin(i * 0.13 + seed * 2.7) * Math.sin(i * 0.031 + seed * 1.3);
         const h = Math.round(5 + Math.abs(t) * 25);
-        bars.push({ h, c: i < n * 0.28 ? '#fa6552' : 'rgba(227,214,198,.4)' });
+        bars.push({ h, c: i < n * frac ? '#fa6552' : 'rgba(227,214,198,.4)' });
       }
       return bars;
     };
     const n = 184;
     return {
-      mixes: [
-        { title: 'SONGS WITH WORDS, VOL. I', meta: 'DEEP HOUSE · DISCO', duration: '74 MIN', bars: wave(1, n) },
-        { title: 'GOLDEN HOUR, SOMEWHERE AT SEA', meta: 'DAY SET · HOUSE', duration: '92 MIN', bars: wave(7, n) },
-        { title: 'AFTER THE SPEECHES', meta: 'PRIVATE EVENT · LATE', duration: '61 MIN', bars: wave(13, n) },
-        { title: 'HOTEL LOBBY, 2AM', meta: 'AMBIENT · SLOW DISCO', duration: '58 MIN', bars: wave(23, n) },
-      ],
+      mixes: this.tracks.map((t, i) => ({
+        title: t.title,
+        meta: t.meta,
+        duration: this.state.durations[i] || '',
+        bars: wave(t.seed, n, this.state.progress[i] || 0),
+        playing: this.state.playing === i,
+        notPlaying: this.state.playing !== i,
+        toggle: () => { if (this._widgets && this._widgets[i]) this._widgets[i].toggle(); },
+      })),
     };
   }
 }
